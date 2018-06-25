@@ -1,8 +1,6 @@
-const button = document.querySelector('button')
-
-const changeHeading = function() {
-  const heading = document.querySelector('#headingTwo');
-  heading.textContent = 'Heading changed!';
+const changeHeading = function(event) {
+  document.querySelector('h1').textContent = document.getElementById('headingchange').value
+  event.preventDefault();
+  document.getElementById('headingchange').value = '';
 }
 
-button.addEventListener('click', changeHeading)

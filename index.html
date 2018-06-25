@@ -8,11 +8,12 @@
   <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
-  
-  <h1 id="headingOne">Chrismess</h1>
-  <h1 id="headingTwo">Chrismess!!</h1>
+ <h1>Chrismess</h1>
 
-  <button>Change heading</button>
+  <form onsubmit="return changeHeading(event)">
+    <input type="text" name="headingchange" id="headingchange" placeholder="Change heading to..."><br>
+    <input type="submit" value="Submit">
+  </form>
 
   <script src="index.js"></script>
 </body>
