@@ -1,7 +1,7 @@
 const button = document.querySelector('button')
 
 const changeHeading = function() {
-  const heading = document.querySelector('#heading 2');
+  const heading = document.querySelector('#headingTwo');
   heading.textContent = 'Heading changed!';
 }
 
