@@ -8,6 +8,8 @@ const renderTitle = function(event) {
 
 const renderYear = function(event) {
   const year = document.createElement('em')
+  year.setAttribute("class", "year")
+  console.log(year)
   year.textContent = event.target.releaseyear.value
   return year
 }
