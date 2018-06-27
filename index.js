@@ -24,7 +24,6 @@ class App {
   renderListItem(movie) {
     const listItem = document.createElement('li')
     listItem.classList.add('movie')
-    listItem.setAttribute('id', `${this.movies.length}`)
 
     const movieProps = Object.keys(movie)
     movieProps.forEach((prop) => {
@@ -45,15 +44,8 @@ class App {
   }
   
   handleTrash(event) {
-    const id = event.target.parentElement.getAttribute('id')
-    for(let i = 0; i < this.movies.length; i++) {
-      if(id == (i+1)) {
-        this.movies.pop(this.movies[i])
-        const list = document.querySelector('#movies')
-        const listItem = document.getElementById(id)
-        list.removeChild(listItem)
-      }
-    }
+    const list = document.querySelector('#movies')
+    list.removeChild(event.target.parentElement)
   }
 
   handleSubmit(event) {
