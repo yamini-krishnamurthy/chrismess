@@ -6,6 +6,7 @@ class App {
       this.handleSubmit(event)
     })
     this.movies = []
+    this.idCounter = 0;
   }
 
   renderSpan(className, value) {
@@ -15,8 +16,9 @@ class App {
     return span
   }
 
-  renderButton(value) {
+  renderButton(className, value) {
     const button = document.createElement('button')
+    button.classList.add(className)
     button.textContent = value
     return button
   }
@@ -24,6 +26,7 @@ class App {
   renderListItem(movie) {
     const listItem = document.createElement('li')
     listItem.classList.add('movie')
+    listItem.setAttribute('id', this.idCounter)
 
     const movieProps = Object.keys(movie)
     movieProps.forEach((prop) => {
@@ -32,20 +35,50 @@ class App {
     })
 
     //add and bind listeners to favorite and trash button for each list item
-    const trashButton = this.renderButton('Trash')
+    const trashButton = this.renderButton('trash', 'Trash')
+    const faveButton = this.renderButton('favorite', 'Favorite')
 
     trashButton.addEventListener('click', (event) => {
       this.handleTrash(event)
     })
 
+    faveButton.addEventListener('click', (event) => {
+      this.handleFavorite(event)
+    })
+
     listItem.appendChild(trashButton)
+    listItem.appendChild(faveButton)
 
     return listItem
   }
   
   handleTrash(event) {
     const list = document.querySelector('#movies')
+    const id = event.target.parentElement.getAttribute('id')
+    for(let i = 0; i < this.movies.length; i++) {
+      if(id == this.movies[i].id) {
+        this.movies.splice(i, 1)
+      }
+    }
     list.removeChild(event.target.parentElement)
+  }
+
+  handleFavorite(event) {
+    const id = event.target.parentElement.getAttribute('id')
+    for(let i = 0; i < this.movies.length; i++) {
+      if(id == this.movies[i].id) {
+        let fave = this.movies[i].favorite
+        fave = this.movies[i].favorite = !fave
+        if(fave) {
+          event.target.parentElement.classList.add('favorite')
+          return
+        }
+        else {
+          event.target.parentElement.classList.remove('favorite')
+          return
+        }
+      }
+    }
   }
 
   handleSubmit(event) {
@@ -53,6 +86,7 @@ class App {
     const movie = {
       title: event.target.moviename.value,
       year: event.target.releaseyear.value,
+      id: ++this.idCounter,
     }
 
     //add the movie to the movies array
