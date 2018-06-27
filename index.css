@@ -51,4 +51,9 @@ li:hover {
 
 .year {
   float: right;
+  font-style: italic;
+}
+
+.movie {
+  font-weight: bold;
 }

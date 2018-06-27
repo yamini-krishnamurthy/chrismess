@@ -2,7 +2,21 @@
 
 The first project for Xtern Bootcamp 2018, Session 3. This project uses vanilla JavaScript/ES2015+.
 
-## Day 2 Homework
+## Day 3 Homework
+* In addition to building a list item, and adding it to the DOM (as we are now), also store each list item in an array
+
+### Bonus Credit
+* Add a *delete* button to each list item that removes it from the list
+
+### Super Mega Bonus Credit
+* Remove the list item from the array as well
+
+### Super Mega Bonus Credit Hyper Fighting
+* Add a "favorite" button to each flick as well that lets you mark your favorites
+* Display favorites differently
+* Be sure to that favorites are recorded in the array
+
+## ~~Day 2 Homework~~
 * Give the function a more accurate name of your choice
 * Add a second field value to the form
 * Display the value of that field to the list
@@ -14,7 +28,7 @@ The first project for Xtern Bootcamp 2018, Session 3. This project uses vanilla 
 ### Super Mega Bonus Credit
 * Use more than one function (break `changeHeading()` into different functions)
 
-## Day 1 Homework
+## ~~Day 1 Homework~~
 
 * Make the button change the text of the heading (the `<h1>`)
 
