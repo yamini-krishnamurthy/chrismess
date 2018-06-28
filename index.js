@@ -16,10 +16,13 @@ class App {
     return span
   }
 
-  renderButton(className, value) {
+  renderButton(className) {
     const button = document.createElement('button')
     button.classList.add(className)
-    button.textContent = value
+    if(className == 'trash')
+      button.innerHTML = '<i class="far fa-trash-alt" title="trash movie"></i>'
+    else 
+      button.innerHTML = '<i class="fas fa-star" title="favorite move=ie"></i>'
     return button
   }
 
@@ -37,8 +40,8 @@ class App {
     })
 
     //add and bind listeners to favorite and trash button for each list item
-    const trashButton = this.renderButton('trash', 'Trash')
-    const faveButton = this.renderButton('fave', 'Favorite')
+    const trashButton = this.renderButton('trash')
+    const faveButton = this.renderButton('fave')
 
     trashButton.addEventListener('click', (event) => {
       this.handleTrash(event, movie)
