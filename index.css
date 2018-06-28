@@ -13,7 +13,19 @@ h1 {
 
 button {
   font-family: 'Roboto Mono';
+  border: 1px solid #d8d8d8;
+  cursor: pointer;
+  transition: background 0.3s;
 }
+
+button:hover {
+  background: #e0e0e0;
+}
+
+input, button {
+  outline: 0;
+}
+
 
 ul {
   list-style-type: none;
@@ -40,16 +52,15 @@ li {
   padding-left: 5px;
   padding-right: 5px;
   font-family:'Roboto Mono';
-  background: #a7bfb1;
+  background: #afc6b8;
   transition: background 0.3s;
 }
 
 li:hover {
-  background: #f2756d;
+  background: #a1b7aa;
 }
 
 .year {
-  float: right;
   font-style: italic;
 }
 
@@ -58,5 +69,16 @@ li:hover {
 }
 
 li.favorite {
-  background: yellow;
+  background: #f2756d;
 }
+
+li.favorite:hover {
+  background: #f25d52;
+}
+.trash, .fave {
+  float: right;
+}
+
+
+
+

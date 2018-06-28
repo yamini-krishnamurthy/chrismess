@@ -30,13 +30,15 @@ class App {
 
     const movieProps = Object.keys(movie)
     movieProps.forEach((prop) => {
+      if(prop == 'favorite' || prop == 'id')
+        return
       const span = this.renderSpan(prop, movie[prop])
       listItem.appendChild(span)
     })
 
     //add and bind listeners to favorite and trash button for each list item
     const trashButton = this.renderButton('trash', 'Trash')
-    const faveButton = this.renderButton('favorite', 'Favorite')
+    const faveButton = this.renderButton('fave', 'Favorite')
 
     trashButton.addEventListener('click', (event) => {
       this.handleTrash(event)
@@ -85,7 +87,7 @@ class App {
     //create new movie object
     const movie = {
       title: event.target.moviename.value,
-      year: event.target.releaseyear.value,
+      year: '(' + event.target.releaseyear.value + ')',
       id: ++this.idCounter,
     }
 
