@@ -87,7 +87,7 @@ class App {
     //create new movie object
     const movie = {
       title: event.target.moviename.value,
-      year: '(' + event.target.releaseyear.value + ')',
+      year: '  (' + event.target.releaseyear.value + ')',
       id: ++this.idCounter,
     }
 
