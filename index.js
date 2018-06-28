@@ -5,8 +5,10 @@ class App {
       event.preventDefault()
       this.handleSubmit(event)
     })
-    this.movies = []
+
     this.list = document.querySelector('#movies')
+    this.movies = []
+    this.load()
   }
 
   renderSpan(className, value) {
@@ -14,6 +16,17 @@ class App {
     span.classList.add(className)
     span.textContent = value
     return span
+  }  
+
+  save() {
+    localStorage.setItem('movies', JSON.stringify(this.movies))
+  }
+
+  load() {
+    const movies = JSON.parse(localStorage.getItem('movies')) || []
+
+    if(movies)
+      movies.forEach(movie => this.addMovie(movie))
   }
 
   renderButton(className) {
@@ -22,7 +35,7 @@ class App {
     if(className == 'trash')
       button.innerHTML = '<i class="far fa-trash-alt" title="trash movie"></i>'
     else 
-      button.innerHTML = '<i class="fas fa-star" title="favorite move=ie"></i>'
+      button.innerHTML = '<i class="fas fa-star" title="favorite movie"></i>'
     return button
   }
 
@@ -56,7 +69,20 @@ class App {
 
     return listItem
   }
-  
+
+  addMovie(movie) {
+    //add the movie to the movies array
+    this.movies.push(movie)
+
+    const listItem = this.renderListItem(movie)
+
+    if (movie.favorite) {
+      listItem.classList.add('favorite')
+    }
+
+    this.list.appendChild(listItem)
+  }
+
   handleTrash(event, movie) {
     //better way to handle deletion: pass the listItem as an argument to this function
     //also pass the movie as an argument so it can easily be popped out
@@ -64,11 +90,13 @@ class App {
     const listItem = event.target.closest('.movie')
     list.removeChild(listItem)
     this.movies.splice(this.movies.indexOf(movie), 1)
+    this.save()
   }
 
   handleFavorite(event, movie) {
     const listItem = event.target.closest('.movie')
     movie.favorite = listItem.classList.toggle('favorite')
+    this.save()
   }
 
   handleSubmit(event) {
@@ -78,12 +106,8 @@ class App {
       year: '  (' + event.target.releaseyear.value + ')',
     }
 
-    //add the movie to the movies array
-    this.movies.push(movie)
-    
-    const listItem = this.renderListItem(movie)
-
-    this.list.appendChild(listItem)
+    this.addMovie(movie)
+    this.save()
 
     //clears text box
     const f = event.target
