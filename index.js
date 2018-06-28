@@ -14,6 +14,7 @@ class App {
   renderSpan(className, value) {
     const span = document.createElement('span')
     span.classList.add(className)
+    span.setAttribute('contenteditable', 'true')
     span.textContent = value
     return span
   }  
@@ -42,11 +43,10 @@ class App {
   renderListItem(movie) {
     const listItem = document.createElement('li')
     listItem.classList.add('movie')
-    listItem.setAttribute('id', this.idCounter)
 
     const movieProps = Object.keys(movie)
     movieProps.forEach((prop) => {
-      if(prop == 'favorite' || prop == 'id')
+      if(prop == 'favorite')
         return
       const span = this.renderSpan(prop, movie[prop])
       listItem.appendChild(span)
