@@ -6,7 +6,7 @@ class App {
       this.handleSubmit(event)
     })
     this.movies = []
-    this.idCounter = 0;
+    this.list = document.querySelector('#movies')
   }
 
   renderSpan(className, value) {
@@ -41,11 +41,11 @@ class App {
     const faveButton = this.renderButton('fave', 'Favorite')
 
     trashButton.addEventListener('click', (event) => {
-      this.handleTrash(event)
+      this.handleTrash(event, movie)
     })
 
     faveButton.addEventListener('click', (event) => {
-      this.handleFavorite(event)
+      this.handleFavorite(event, movie)
     })
 
     listItem.appendChild(trashButton)
@@ -54,33 +54,23 @@ class App {
     return listItem
   }
   
-  handleTrash(event) {
+  handleTrash(event, movie) {
+    //better way to handle deletion: pass the listItem as an argument to this function
+    //also pass the movie as an argument so it can easily be popped out
     const list = document.querySelector('#movies')
-    const id = event.target.parentElement.getAttribute('id')
-    for(let i = 0; i < this.movies.length; i++) {
-      if(id == this.movies[i].id) {
-        this.movies.splice(i, 1)
-      }
-    }
-    list.removeChild(event.target.parentElement)
+    const listItem = event.target.closest('.movie')
+    list.removeChild(listItem)
+    this.movies.splice(this.movies.indexOf(movie), 1)
   }
 
-  handleFavorite(event) {
-    const id = event.target.parentElement.getAttribute('id')
-    for(let i = 0; i < this.movies.length; i++) {
-      if(id == this.movies[i].id) {
-        let fave = this.movies[i].favorite
-        fave = this.movies[i].favorite = !fave
-        if(fave) {
-          event.target.parentElement.classList.add('favorite')
-          return
-        }
-        else {
-          event.target.parentElement.classList.remove('favorite')
-          return
-        }
-      }
-    }
+  handleFavorite(event, movie) {
+    const index = this.movies.indexOf(movie)
+    const listItem = event.target.closest('.movie')
+    const fave = this.movies[index].favorite = !this.movies[index].favorite
+    if(fave)
+      listItem.classList.add('favorite')
+    else
+      listItem.classList.remove('favorite')
   }
 
   handleSubmit(event) {
@@ -96,7 +86,7 @@ class App {
     
     const listItem = this.renderListItem(movie)
 
-    document.querySelector('#movies').appendChild(listItem)
+    this.list.appendChild(listItem)
 
     //clears text box
     const f = event.target
