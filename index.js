@@ -64,13 +64,8 @@ class App {
   }
 
   handleFavorite(event, movie) {
-    const index = this.movies.indexOf(movie)
     const listItem = event.target.closest('.movie')
-    const fave = this.movies[index].favorite = !this.movies[index].favorite
-    if(fave)
-      listItem.classList.add('favorite')
-    else
-      listItem.classList.remove('favorite')
+    movie.favorite = listItem.classList.toggle('favorite')
   }
 
   handleSubmit(event) {
@@ -78,7 +73,6 @@ class App {
     const movie = {
       title: event.target.moviename.value,
       year: '  (' + event.target.releaseyear.value + ')',
-      id: ++this.idCounter,
     }
 
     //add the movie to the movies array
