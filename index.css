@@ -26,6 +26,13 @@ input, button {
   outline: 0;
 }
 
+span:focus {
+  outline: 0;
+}
+
+li.favorite button.fave  {
+  color: #f4c242;
+}
 
 ul {
   list-style-type: none;
